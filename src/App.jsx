@@ -1,25 +1,35 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import LandingPage from './pages/LandingPage';
+
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LandingPage from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+import { useEffect, useState } from 'react';
+import './styles/styles.css';
+import './app.css'
+import Jobs from './pages/Jobs';
 
-import './styles/main.css';
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-const App = () => {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+  }, []);
+
   return (
+    
     <Router>
-      <Navbar />
       <Routes>
+        
         <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={isAuthenticated ? <Dashboard setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
+        <Route path="/Jobs" element={<Jobs/>} />
       </Routes>
-      <Footer />
     </Router>
   );
-};
+}
 
 export default App;

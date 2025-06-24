@@ -1,0 +1,26 @@
+import React from 'react';
+import './Landing.css';
+import Footer from '../components/footer';
+import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+
+const LandingPage = () => {
+  return (
+    
+    <div className="landing">
+      <Navbar/>
+      <h1 className="landing-heading">Welcome to DevConnect</h1>
+      <p className="landing-desc">
+        DevConnect is a platform for developers to showcase their skills, projects,
+        and connect with other devs. Build your profile and explore others’ journeys.
+      </p>
+      <div className="landing-buttons">
+        <Link to="/login" className="btn">Login</Link>
+        <Link to="/register" className="btn">Register</Link>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default LandingPage;

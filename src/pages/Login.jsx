@@ -1,58 +1,68 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import './Login.css';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const LoginPage = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const validate = () => {
-    const newErrors = {};
-    if (!email) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Invalid email format';
-
-    if (!password) newErrors.password = 'Password is required';
-    else if (password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = e => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      alert('Login successful!');
-      // Handle login logic here
+
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        console.log(data.token);
+        setIsAuthenticated(true);
+        navigate('/dashboard'); // ✅ Navigate to dashboard
+      } else {
+        alert(data.message || 'Login failed');
+      }
+    } catch (err) {
+      alert('Server error. Please try again later.');
     }
   };
 
   return (
-    <div className="form-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleLogin}>
+        <h2>Login to DevConnect</h2>
+
+        <label>Email</label>
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Enter your email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
-        {errors.email && <p className="error">{errors.email}</p>}
 
+        <label>Password</label>
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Enter your password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        {errors.password && <p className="error">{errors.password}</p>}
 
-        <button className="purple-btn" type="submit">Login</button>
+        <button type="submit">Login</button>
+
+        <p className="login-switch">
+          New user? <Link to="/register">Register here</Link>
+        </p>
       </form>
-      <p>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

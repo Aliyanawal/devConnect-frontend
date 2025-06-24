@@ -1,0 +1,99 @@
+/* Login.css - Purple Theme */
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3f0fa;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+  padding: 40px 20px;
+}
+
+.login-form {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(44, 13, 94, 0.2);
+  width: 100%;
+  max-width: 400px;
+  animation: fadeIn 1.2s ease;
+}
+
+.login-form h2 {
+  color: #5b2d91;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #4e3a77;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.login-form input:focus {
+  border-color: #9c27b0;
+  outline: none;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #7b1fa2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #6a1b9a;
+}
+
+.login-switch {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.login-switch a {
+  color: #7b1fa2;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

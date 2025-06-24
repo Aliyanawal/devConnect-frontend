@@ -1,76 +1,91 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // <-- imported here
+import './Register.css';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: ''
-  });
+  const navigate = useNavigate();
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPass, setShowPass] = useState(false);
   const [errors, setErrors] = useState({});
 
   const validate = () => {
-    const newErrors = {};
-    if (!formData.name) newErrors.name = 'Full name is required';
+    const errs = {};
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
-    if (!formData.email) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email format';
+    if (!gmailRegex.test(email)) {
+      errs.email = 'Please enter a valid Gmail address';
+    }
 
-    if (!formData.password) newErrors.password = 'Password is required';
-    else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
   };
 
-  const handleChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
+    if (!validate()) return;
+
+    const res = await fetch('http://localhost:5000/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (res.ok) {
       alert('Registration successful!');
-      // Send data to backend here
+      navigate('/login');
+    } else {
+      const data = await res.json();
+      alert(data.message || 'Registration failed');
     }
   };
 
   return (
-    <div className="form-container">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        {errors.name && <p className="error">{errors.name}</p>}
+    <div className="register-container">
+      <form onSubmit={handleSubmit} className="register-form">
+        <h2>Register on DevConnect</h2>
 
+        <label>Name</label>
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
+          value={name}
+          onChange={e => setName(e.target.value)}
+          placeholder="Your name"
+          required
+        />
+
+        <label>Email</label>
+        <input
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Your Gmail address"
+          required
         />
         {errors.email && <p className="error">{errors.email}</p>}
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
+        <label>Password</label>
+        <div className="password-input">
+          <input
+            type={showPass ? 'text' : 'password'}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            placeholder="Create a password"
+            required
+          />
+          <span onClick={() => setShowPass(!showPass)} className="eye-icon">
+            {showPass ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
         {errors.password && <p className="error">{errors.password}</p>}
 
-        <button className="purple-btn" type="submit">Register</button>
+        <button type="submit">Register</button>
+
+        <p className="switch-link">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
       </form>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
     </div>
   );
 };

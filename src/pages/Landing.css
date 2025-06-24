@@ -1,0 +1,104 @@
+/* Landing.css - Purple Color Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #ecebed;
+  color: #210c32;
+  
+}
+
+.landing {
+  text-align: center;
+  /* padding:  20px 40px; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.landing-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #360f66;
+  margin-bottom: 20px;
+  animation: fadeIn 1.5s ease-in-out;
+  padding: 40px;
+}
+
+.landing-desc {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  color: #1a0541;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.landing-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  animation: fadeIn 2.5s ease-in-out;
+}
+
+.btn {
+  background-color: #360f66;
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 20vh;
+}
+
+.btn:hover {
+  background-color: #651fff;
+  transform: translateY(-2px);
+}
+
+/* Footer Styling */
+.footer {
+  margin-top: auto;
+  background-color: #160c2d;
+  color: #ccc2dc;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.9rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .landing-heading {
+    font-size: 2.2rem;
+  }
+
+  .landing-desc {
+    font-size: 1rem;
+  }
+
+  .landing-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

@@ -1,0 +1,158 @@
+/* Main Container */
+.dashboard-maincontainer{
+  background: #f6f2fc;
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+
+}
+.dashboard-container {
+  background: #f6f2fc;
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  padding: 40px;
+
+ 
+}
+
+/* Content Box */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #ffffff;
+  padding: 32px ;
+  padding-top: 30px;
+  border-radius: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(106, 27, 154, 0.15);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.dashboard-content button {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 200px;
+  padding-top: 20px;
+}
+
+
+/* Heading */
+.dashboard-content h2 {
+  color: #6a1b9a;
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+
+/* Bio text */
+.dashboard-content .bio {
+  
+  font-size: 17px;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+.dashboard-content .button-group{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 10px;
+  
+}
+
+/* Logout Button */
+.dashboard-content button {
+  background-color: #9c27b0;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+}
+
+.dashboard-content button:hover {
+  background-color: #7b1fa2;
+  transform: translateY(-2px);
+}
+
+/* Update Form Styles */
+.dashboard-form {
+  margin-top: 30px;
+}
+
+.dashboard-form label {
+  font-weight: 600;
+  display: block;
+  margin: 12px 0 6px;
+  color: #6a1b9a;
+}
+
+.dashboard-content input,
+.dashboard-content textarea {
+  width: 100%; 
+  line-height: 1.5;         
+  padding: 14px 20px ;
+  padding-left: 10px;       
+  font-size: 16px;           
+  border-radius: 8px;        
+  border: 1px solid #ccc;
+
+  box-sizing: border-box;
+  transition: border 0.3s;
+}
+
+.dashboard-content input:focus,
+.dashboard-content textarea:focus {
+  border-color: #9c27b0;
+  outline: none;
+}
+
+.dashboard-content textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.dashboard-content .save-btn {
+  width: 200px;
+  margin-top: 20px;
+  background-color: #6a1b9a;
+  color: #fff;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-content .save-btn:hover {
+  background-color: #4a0072;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Tweaks */
+@media screen and (max-width: 768px) {
+  .dashboard-content {
+    padding: 24px;
+  }
+
+  .dashboard-content h2 {
+    font-size: 24px;
+  }
+}
