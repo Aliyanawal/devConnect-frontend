@@ -6,9 +6,10 @@ import Navbar from '../components/Navbar';
 
 const LandingPage = () => {
   return (
-    
-    <div className="landing">
+    <div className='land'>
       <Navbar/>
+    <div className="landing">
+      
       <h1 className="landing-heading">Welcome to DevConnect</h1>
       <p className="landing-desc">
         DevConnect is a platform for developers to showcase their skills, projects,
@@ -18,7 +19,9 @@ const LandingPage = () => {
         <Link to="/login" className="btn">Login</Link>
         <Link to="/register" className="btn">Register</Link>
       </div>
-      <Footer />
+      
+    </div>
+    <Footer />
     </div>
   );
 };

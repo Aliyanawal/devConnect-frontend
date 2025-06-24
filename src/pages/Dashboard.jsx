@@ -12,7 +12,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
   useEffect(() => {
   const fetchProfile = async () => {
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:5000/api/auth/userName', {
+    const res = await fetch('http://localhost:5000/api/auth/getUser', {
       headers: { 'Authorization': `Bearer ${token}` },
     });
     const data = await res.json();
@@ -38,24 +38,29 @@ const Dashboard = ({ setIsAuthenticated }) => {
   };
 
   const handleSave = async () => {
-    const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:5000/api/auth/bio', {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
+  const token = localStorage.getItem('token');
+  console.log('Trying to update profile with:', user);
 
-    if (res.ok) {
-      const updated = await res.json();
-      setUser(updated);
-      setEditMode(false);
-    } else {
-      alert('Failed to update profile');
-    }
-  };
+  const res = await fetch('http://localhost:5000/api/auth/updatebio', {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+
+  const data = await res.json();
+  console.log('Server response:', res.status, data); // ✅ log response
+
+  if (res.ok) {
+    setUser(data.user); // <- use .user as returned from backend
+    setEditMode(false);
+  } else {
+    alert('Failed to update profile');
+  }
+};
+
 
   return (
     <div className='dashboard-maincontainer'>
@@ -64,26 +69,26 @@ const Dashboard = ({ setIsAuthenticated }) => {
     <div className="dashboard-container">
       
       <div className="dashboard-content">
-        <h2>Welcome, {user?.name}</h2>
+        <h2> {user?.name}</h2>
 
         {editMode ? (
           <>
             <input name="bio" value={user?.bio || ''} onChange={handleChange} placeholder="Bio" />
-            <input name="studies" value={user?.studies || ''} onChange={handleChange} placeholder="Studies" />
+            <input name="education" value={user?.education || ''} onChange={handleChange} placeholder="Education" />
             <input name="experience" value={user?.experience || ''} onChange={handleChange} placeholder="Experience" />
             <input name="projects" value={user?.projects || ''} onChange={handleChange} placeholder="Projects" />
             <input name="resume" value={user?.resume || ''} onChange={handleChange} placeholder="Resume Link" />
-            <input name="github" value={user?.resume || ''} onChange={handleChange} placeholder="github Link" />
+            <input name="github" value={user?.github || ''} onChange={handleChange} placeholder="github Link" />
             <button  className="save-btn" onClick={handleSave}>Save</button>
           </>
         ) : (
           <>
             <p><strong>Bio:</strong> {user?.bio || 'No bio provided'}</p>
-            <p><strong>Education:</strong> {user?.studies || 'Not added'}</p>
+            <p><strong>Education:</strong> {user?.education || 'Not added'}</p>
             <p><strong>Experience:</strong> {user?.experience || 'Not added'}</p>
             <p><strong>Projects:</strong> {user?.projects || 'Not added'}</p>
             <p><strong>Resume:</strong> {user?.resume ? <a href={user.resume}>View</a> : 'Not uploaded'}</p>
-            <p><strong>Github:</strong> {user?.resume ? <a href={user.resume}>View</a> : 'Not added'}</p>
+            <p><strong>Github:</strong> {user?.github ? <a href={user.resume}>View</a> : 'Not added'}</p>
 
 
           </>
