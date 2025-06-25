@@ -1,59 +1,68 @@
-/* pages/ConnectPage.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 .connect-page {
-  
   background-color: #f7f7ff;
   min-height: 100vh;
+  padding: 2rem 1rem;
+  font-family: 'Inter', sans-serif;
 }
 
 .connect-heading {
-    padding-top: 3rem;
   text-align: center;
-  font-size: 2rem;
-  font-family: 'Poppins', sans-serif;
-  font-weight: bolder;
+  font-size: 2.2rem;
+  font-weight: 700;
   color: #5a189a;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .developer-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .developer-card {
-  background: white;
+  background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
-  width: 280px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  word-wrap: break-word;
 }
 
 .developer-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-4px);
 }
 
 .developer-card h3 {
-  margin-bottom: 0.5rem;
   color: #3c096c;
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
 }
 
 .developer-card p {
-  margin: 0.3rem 0;
+  color: #444;
   font-size: 0.95rem;
+  margin-bottom: 0.5rem;
 }
 
 .developer-card button {
-  margin-top: 0.8rem;
+  margin-top: auto;
   padding: 0.5rem 1rem;
   background-color: #7b2cbf;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
 }
 
 .developer-card button:hover {

@@ -1,51 +1,58 @@
-// pages/ConnectPage.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import './ConnectPage.css';
 
-const dummyDevelopers = [
-  {
-    id: 1,
-    name: 'Adil Mahmood',
-    skills: ['React', 'Node.js', 'MongoDB'],
-    bio: 'Full Stack Developer passionate about building modern web apps.',
-  },
-  {
-    id: 2,
-    name: 'Aisha Khan',
-    skills: ['Python', 'Django', 'Machine Learning'],
-    bio: 'AI enthusiast and backend developer.',
-  },
-  {
-    id: 3,
-    name: 'Ravi Verma',
-    skills: ['Angular', 'Firebase', 'UI/UX'],
-    bio: 'Frontend wizard with love for clean UI.',
-  },
-];
-
 const ConnectPage = () => {
+  const [developers, setDevelopers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const handleConnect = (devId) => {
-    navigate(`/profile/${devId}`); // This route should lead to detailed profile
+  const fetchDevelopers = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/getAll');
+      const data = await res.json();
+      setDevelopers(data);
+    } catch (err) {
+      console.error('Failed to fetch developers:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
+  useEffect(() => {
+    fetchDevelopers();
+  }, []);
+
+  const handleConnect = (id) => {
+    navigate(`/profile/${id}`);
+  };
+
+
   return (
+    <div className='connect.main'><Navbar />
     <div className="connect-page">
-      <Navbar />
+      
       <h2 className="connect-heading">Connect With Other Developers</h2>
-      <div className="developer-cards">
-        {dummyDevelopers.map((dev) => (
-          <div key={dev.id} className="developer-card">
-            <h3>{dev.name}</h3>
-            <p><strong>Skills:</strong> {dev.skills.join(', ')}</p>
-            <p><strong>Bio:</strong> {dev.bio}</p>
-            <button onClick={() => handleConnect(dev.id)}>Connect</button>
-          </div>
-        ))}
-      </div>
+      {loading ? (
+        <p>Loading developers...</p>
+      ) : developers.length === 0 ? (
+        <p>No developers found.</p>
+      ) : (
+        <div className="developer-cards">
+          {developers.map((dev) => (
+            <div key={dev._id} className="developer-card">
+              <h3>{dev.name}</h3>
+              <p><strong>Bio:</strong> {dev.bio || "No bio provided"}</p>
+              <p><strong>Education:</strong> {dev.education || "Not added"}</p>
+              <p><strong>Experience:</strong> {dev.experience || "Not added"}</p>
+              <p><strong>GitHub:</strong> {dev.github ? <a href={dev.github} target="_blank" rel="noopener noreferrer">{dev.github}</a> : "Not added"}</p>
+              <button onClick={() => handleConnect(dev._id)}>Connect</button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
     </div>
   );
 };
