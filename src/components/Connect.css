@@ -1,0 +1,50 @@
+.explore-box {
+  padding: 24px;
+  background-color: white;
+  border: 2px solid #e5e5f7;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(90, 24, 154, 0.1);
+  text-align: center;
+  margin: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 300px;
+  max-width: 100%;
+  color: #333;
+}
+
+.explore-box:hover {
+  background-color: #f3e8ff;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(90, 24, 154, 0.2);
+}
+
+/* Optional: Titles inside */
+.explore-box h2 {
+  color: #5a189a;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+/* Optional: Description inside */
+.explore-box p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Button inside the card */
+.explore-box button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #7b2cbf;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.explore-box button:hover {
+  background-color: #5a189a;
+}

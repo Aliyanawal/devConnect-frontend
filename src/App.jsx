@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import './styles/styles.css';
 import './app.css'
 import Jobs from './pages/Jobs';
+import ConnectPage from './pages/ConnecPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,6 +28,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={isAuthenticated ? <Dashboard setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
         <Route path="/Jobs" element={<Jobs/>} />
+        <Route path="/ConnectPage" element={<ConnectPage/>} />
+        
       </Routes>
     </Router>
   );

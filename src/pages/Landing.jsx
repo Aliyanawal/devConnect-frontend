@@ -3,6 +3,8 @@ import './Landing.css';
 import Footer from '../components/footer';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import ExploreJobs from '../components/ExploreJobs';
+import ConnectWithDevs from '../components/ConnectWithDevs';
 
 const LandingPage = () => {
   return (
@@ -18,6 +20,11 @@ const LandingPage = () => {
       <div className="landing-buttons">
         <Link to="/login" className="btn">Login</Link>
         <Link to="/register" className="btn">Register</Link>
+        
+      </div>
+      <div className='connect'>
+        <ExploreJobs/>
+        <ConnectWithDevs/>
       </div>
       
     </div>

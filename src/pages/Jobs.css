@@ -2,6 +2,7 @@
   padding: 8rem;
   padding-top: 20px ;
   height: max-content;
+  min-height: 100vh;
 }
 
 .search-bar {
