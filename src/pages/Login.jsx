@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const LoginPage = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
@@ -33,6 +34,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
   };
 
   return (
+    <div className='login-main'><Navbar/>
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
         <h2>Login to DevConnect</h2>
@@ -61,6 +63,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
           New user? <Link to="/register">Register here</Link>
         </p>
       </form>
+    </div>
     </div>
   );
 };

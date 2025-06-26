@@ -9,6 +9,9 @@ import './styles/styles.css';
 import './app.css'
 import Jobs from './pages/Jobs';
 import ConnectPage from './pages/ConnecPage';
+import ProfilePage from './pages/profile';
+import ProtectedRoute from './components/ProtectedRoute';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,8 +30,16 @@ function App() {
         <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={isAuthenticated ? <Dashboard setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/login" />} />
-        <Route path="/Jobs" element={<Jobs/>} />
-        <Route path="/ConnectPage" element={<ConnectPage/>} />
+
+        <Route path="/Jobs" element={
+          <ProtectedRoute>
+            <Jobs/>
+            </ProtectedRoute>} />
+        <Route path="/ConnectPage" element={
+          <ProtectedRoute>
+            <ConnectPage/>
+            </ProtectedRoute>} />
+        <Route path="/Profile/:id" element={<ProfilePage/>} />
         
       </Routes>
     </Router>

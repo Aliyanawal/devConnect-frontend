@@ -156,3 +156,32 @@
     font-size: 24px;
   }
 }
+
+.extras-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+
+/* 
+.extra-card:hover {
+  transform: translateY(-5px);
+  background-color: #f0e7ff;
+} */
+
+.extra-card button {
+  margin-top: 1rem;
+  background-color: #7b2cbf;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.extra-card button:hover {
+  background-color: #5a189a;
+}
