@@ -5,11 +5,39 @@
   font-family: 'Segoe UI', 'Roboto', sans-serif;
 
 }
+
+.add-jobs {
+  display: flex;
+  justify-content: center; /* Center content */
+  align-items: flex-start;
+  
+  padding: 2rem;
+}
+
+.dashboard-right {
+  flex: 2;
+  background: #f6f2fc;
+  padding-top: 40px;
+  
+  max-height: 500px;
+  overflow-y: auto;
+  min-width: 280px;
+  max-width: 320px;
+ 
+}
+
+
 .dashboard-container {
+
+    flex: 9;
+  background: #f6f2fc;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
   background: #f6f2fc;
   min-height: 100vh;
   font-family: 'Segoe UI', 'Roboto', sans-serif;
   padding: 40px;
+  padding-left: 250px;
+  
 
  
 }
@@ -184,4 +212,35 @@
 
 .extra-card button:hover {
   background-color: #5a189a;
+}
+
+.dashboard-main {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.dashboard-left {
+  flex: 2;
+}
+
+
+
+.applied-jobs h3 {
+  color: #5a189a;
+  margin-bottom: 1rem;
+}
+
+.applied-jobs ul {
+  list-style: none;
+  padding: 0;
+}
+
+.applied-jobs li {
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
 }

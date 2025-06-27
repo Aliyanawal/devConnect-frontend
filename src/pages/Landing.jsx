@@ -9,7 +9,7 @@ import ConnectWithDevs from '../components/ConnectWithDevs';
 const LandingPage = () => {
   return (
     <div className='land'>
-      <Navbar/>
+    
     <div className="landing">
       
       <h1 className="landing-heading">Welcome to DevConnect</h1>

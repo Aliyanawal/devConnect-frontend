@@ -5,6 +5,7 @@ import Footer from '../components/footer';
 import './Dashboard.css';
 import ExploreJobs from '../components/ExploreJobs';
 import ConnectWithDevs from '../components/ConnectWithDevs';
+import AppliedJobs from '../components/AppliedJobs';
 
 const Dashboard = ({ setIsAuthenticated }) => {
   const [user, setUser] = useState(null);
@@ -59,7 +60,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   return (
     <div className='dashboard-maincontainer'>
-      <Navbar />
+      
+      <div className='add-jobs'>
       <div className="dashboard-container">
         <div className="dashboard-content">
           <h2>{user?.name}</h2>
@@ -104,6 +106,11 @@ const Dashboard = ({ setIsAuthenticated }) => {
             <ConnectWithDevs/>
           </div>
         </div>
+        </div>
+        <div className="dashboard-right">
+          <AppliedJobs />
+        </div>
+        
       </div>
       <Footer />
     </div>

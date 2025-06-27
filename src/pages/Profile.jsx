@@ -18,7 +18,7 @@ const ProfilePage = () => {
   if (!developer) return <p>Loading profile...</p>;
 
   return (
-    <div className='profile-main'><Navbar />
+    <div className='profile-main'>
     <div className="profile-page">
       
       <div className="profile-container">

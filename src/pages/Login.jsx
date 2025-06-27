@@ -34,7 +34,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <div className='login-main'><Navbar/>
+    <div className='login-main'>
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
         <h2>Login to DevConnect</h2>

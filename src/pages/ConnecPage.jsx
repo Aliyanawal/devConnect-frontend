@@ -41,7 +41,7 @@ const ConnectPage = () => {
 
   return (
     <div className="connect-wrapper">
-      <Navbar />
+      
       <div className="connect-page">
         <h2 className="connect-heading">Connect With Other Developers</h2>
 

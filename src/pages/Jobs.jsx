@@ -10,9 +10,9 @@ const Jobs = () => {
   const [cv, setCv] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [feedback, setFeedback] = useState('');
 
   useEffect(() => {
-    // Replace with your actual backend URL
     fetch('http://localhost:5000/api/jobs/getAll')
       .then(res => res.json())
       .then(data => setJobs(data))
@@ -23,12 +23,52 @@ const Jobs = () => {
     setCv(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (cv) {
-      setFormSubmitted(true);
-    } else {
+
+    if (!cv) {
       alert("Please upload your CV before submitting.");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please login to apply for a job.");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("cv", cv); // 👈 Should match backend field name
+
+      const res = await fetch(`http://localhost:5000/api/application/apply/${selectedJob._id}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          // Do NOT set Content-Type manually here
+        },
+        body: formData,
+      });
+
+      let data;
+      try {
+        data = await res.json(); // Safely parse JSON
+      } catch (jsonErr) {
+        console.error("Invalid JSON response:", jsonErr);
+        throw new Error("Server returned invalid response.");
+      }
+
+      if (res.ok) {
+        setFormSubmitted(true);
+        setFeedback("Application sent successfully!");
+      } else {
+        console.error("Backend responded with:", data);
+        setFeedback(data.message || "Failed to apply.");
+      }
+
+    } catch (error) {
+      console.error("Catch block error:", error);
+      setFeedback("Something went wrong. Try again later.");
     }
   };
 
@@ -39,7 +79,7 @@ const Jobs = () => {
 
   return (
     <div className='jobs-main'>
-      <Navbar />
+      
       <div className="jobs-container">
         <input
           type="text"
@@ -61,6 +101,7 @@ const Jobs = () => {
                   setShowApplyForm(false);
                   setFormSubmitted(false);
                   setCv(null);
+                  setFeedback('');
                 }}
               >
                 <h3>{job.role}</h3>
@@ -92,7 +133,11 @@ const Jobs = () => {
               )}
 
               {formSubmitted && (
-                <p className="success-message">Application sent successfully!</p>
+                <p className="success-message">{feedback}</p>
+              )}
+
+              {!formSubmitted && feedback && (
+                <p className="error-message" style={{ color: 'red' }}>{feedback}</p>
               )}
             </div>
           )}
